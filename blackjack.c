@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <math.h>
 
+// T - TREBOL   C - CORAZONES
+// P - PICAS    D - DIAMANTES
 typedef int Carta;
 
 typedef struct nodo {
@@ -62,7 +64,10 @@ int main() {
 	srand(time(NULL));
 	
 	for(i = 0; i < 12; i++) {
-		numero = 1 + rand() % 52;
+		numero = 1 + rand() % 13;
+		//tipoCarta = rand() % 4;
+		
+		
 		apilar(&pila, numero);
 		//printf("Numero: %i\n", numero);
 	}

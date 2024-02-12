@@ -1,0 +1,14 @@
+https://es.ccm.net/ordenadores/programacion/1660-las-pilas-en-lenguaje-c/
+
+https://www.geeksforgeeks.org/introduction-to-stack-data-structure-and-algorithm-tutorials/
+
+https://www.geeksforgeeks.org/arrow-operator-in-c-c-with-examples/
+
+https://www.programaenlinea.net/las-pilas-lenguaje-c/
+
+https://www.youtube.com/watch?v=M1al4S4i9o0
+
+https://www.geeksforgeeks.org/c-pointers/
+
+https://www.tutorialspoint.com/c_standard_library/c_function_free.htm
+
