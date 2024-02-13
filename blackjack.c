@@ -74,8 +74,8 @@ int estaRepetida(Pila *pila, int carta) {
 }
 
 int main() {
-	int carta = 0, i = 0, j = 0, numeroCarta = 0,
- 	tipoCarta = 0, contCartas = 0, arreglo[4][3];
+	int carta = 0, i = 0, j = 0, numeroCarta = 0, valorDesapilado = 0,
+ 	tipoCarta = 0, contCartas = 0, arreglo[4][3], temp = 0;
  	
 	Pila pila;
 	
@@ -94,11 +94,22 @@ int main() {
 		
 		//printf("Numero: %i\n", carta);
 	}
-	printf("\n\n%i\n\n", longitudPila(&pila));
+	printf("%i\n\n", longitudPila(&pila));
 	//imprimirPila(&pila);
 	for(i = 0; i < 4; i++) {
 		for(j = 0; j < 3; j++) {
-			arreglo[i][j] = desapilar(&pila);
+			valorDesapilado = desapilar(&pila);
+			if(valorDesapilado < 20){
+				arreglo[i][j] = 1;
+			}else if(valorDesapilado > 99){
+				arreglo[i][j] = 10;
+			}else {
+				while(valorDesapilado >= 10){
+					valorDesapilado = valorDesapilado / 10;
+				}
+				arreglo[i][j] = valorDesapilado;
+			}
+			//arreglo[i][j] = desapilar(&pila);
 		}
 	}
 	for(i = 0; i < 4; i++) {
