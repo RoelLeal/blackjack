@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #include <math.h>
 
-// T - TREBOL   C - CORAZONES
-// P - PICAS    D - DIAMANTES
+// 1 - PICAS    2 - DIAMANTES
+// 3 - TREBOL   4 - CORAZONES
+
 typedef int Carta;
 
 typedef struct nodo {
@@ -55,21 +56,40 @@ void imprimirPila(Pila *pila) {
 	}
 }
 
+int estaRepetida(Pila *pila, int carta) {
+	Nodo *nodo;
+	int bandera = 0;
+	nodo = pila -> cima;
+	while(nodo != NULL) {
+		if(carta == nodo -> elemento) {
+			bandera = 1;
+			break;
+		}
+		nodo = nodo -> siguiente;
+	}
+	return bandera;
+}
+
 int main() {
-	int numero = 0, i = 0, numeroCarta = 0;
+	int carta = 0, i = 0, numeroCarta = 0,
+ 	tipoCarta = 0, contCartas = 0, arreglo[4][3];
+ 	
 	Pila pila;
 	
 	inicializarPila(&pila);
 	
 	srand(time(NULL));
 	
-	for(i = 0; i < 12; i++) {
-		numero = 1 + rand() % 13;
-		//tipoCarta = rand() % 4;
+	while(contCartas < 12) {
+		numeroCarta = 1 + rand() % 13;
+		tipoCarta = 1 + rand() % 4;
+		carta = (numeroCarta * 10) + tipoCarta;
+		if(estaRepetida(&pila, carta) != 1) {
+			apilar(&pila, carta);
+			contCartas++;
+		}
 		
-		
-		apilar(&pila, numero);
-		//printf("Numero: %i\n", numero);
+		//printf("Numero: %i\n", carta);
 	}
 	imprimirPila(&pila);
 	printf("\n\n%i", longitudPila(&pila));
