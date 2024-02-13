@@ -39,11 +39,14 @@ int longitudPila(Pila *pila) {
 	return cont;
 }
 
-void desapilar(Pila *pila) {
+int desapilar(Pila *pila) {
+	int elem = 0;
 	Nodo *f;
 	f = pila -> cima;
 	pila -> cima = f -> siguiente;
+	elem = f -> elemento;
 	free(f);
+	return elem;
 }
 
 void imprimirPila(Pila *pila) {
@@ -71,7 +74,7 @@ int estaRepetida(Pila *pila, int carta) {
 }
 
 int main() {
-	int carta = 0, i = 0, numeroCarta = 0,
+	int carta = 0, i = 0, j = 0, numeroCarta = 0,
  	tipoCarta = 0, contCartas = 0, arreglo[4][3];
  	
 	Pila pila;
@@ -91,7 +94,18 @@ int main() {
 		
 		//printf("Numero: %i\n", carta);
 	}
-	imprimirPila(&pila);
+	printf("\n\n%i\n\n", longitudPila(&pila));
+	//imprimirPila(&pila);
+	for(i = 0; i < 4; i++) {
+		for(j = 0; j < 3; j++) {
+			arreglo[i][j] = desapilar(&pila);
+		}
+	}
+	for(i = 0; i < 4; i++) {
+		for(j = 0; j < 3; j++) {
+			printf("%i\n", arreglo[i][j]);
+		}
+	}
 	printf("\n\n%i", longitudPila(&pila));
 	return 0;
 }
