@@ -12,3 +12,6 @@ https://www.geeksforgeeks.org/c-pointers/
 
 https://www.tutorialspoint.com/c_standard_library/c_function_free.htm
 
+https://codeforwin.org/c-programming/how-to-find-first-and-last-digit-of-any-number
+
+
