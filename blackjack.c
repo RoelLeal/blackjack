@@ -53,7 +53,7 @@ void imprimirPila(Pila *pila) {
 	Nodo *nodo;
 	int i = 0;
 	nodo = pila -> cima;
-	for(i = 0; i < 12; i++) {
+	while(nodo != NULL) {
 		printf("%i \n", nodo -> elemento);
 		nodo = nodo -> siguiente;
 	}
@@ -75,8 +75,8 @@ int estaRepetida(Pila *pila, int carta) {
 
 int main() {
 	int carta = 0, i = 0, j = 0, numeroCarta = 0, valorDesapilado = 0,
- 	tipoCarta = 0, contCartas = 0, arreglo[4][3], temp = 0,jugador[4], 
-	v1 = 0,mayor = 0, numjug = 0, sum = 0, gano21 = 0, contOnce = 0;
+ 	tipoCarta = 0, contCartas = 0, arreglo[4][3], temp = 0, jugador[4], 
+	numjug = 0, mayor = 0, contOnce = 0, sum = 0, v1 = 0;
  	
 	Pila pila;
 	
@@ -102,9 +102,7 @@ int main() {
 			}else if(valorDesapilado > 99) {
 				arreglo[i][j] = 10;
 			}else {
-				while(valorDesapilado >= 10) {
-					valorDesapilado = valorDesapilado / 10;
-				}
+				valorDesapilado = valorDesapilado / 10;
 				arreglo[i][j] = valorDesapilado;
 			}
 		}
@@ -125,15 +123,22 @@ int main() {
 			jugador[i] -= 10;
 			contOnce--;
 		}
-		if(jugador[i] > mayor && jugador[i] < 22){
+		contOnce = 0;
+		if(jugador[i] > mayor && jugador[i] <= 21){
    			mayor = jugador[i];
    			numjug = i;
 	   	}
-	   	printf("Total: %i\n", jugador[i]);
+	   	printf("[%i] Total: %i\n", i+1, jugador[i]);
 	}
-    
-	printf("\nEl jugador %i",numjug+1);
-	printf("\nGana con %i", mayor);
+	
+    printf("\nEl jugador %i",numjug+1);
+	printf("\nGana con %i\n", mayor);
+	
+	for(i = 0; i < 4; i++) {
+		if(i != numjug) {
+			printf("\nEl jugador %i perdi%c", i+1, 162);
+		}
+	}
 
 	return 0;
 }
