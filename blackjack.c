@@ -76,8 +76,7 @@ int estaRepetida(Pila *pila, int carta) {
 int main() {
 	int carta = 0, i = 0, j = 0, numeroCarta = 0, valorDesapilado = 0,
  	tipoCarta = 0, contCartas = 0, arreglo[4][3], temp = 0,jugador[4], 
-	v1 = 0,mayor = 0, numjug = 0, sum = 0, gano21 = 0;
- 	
+	v1 = 0,mayor = 0, numjug = 0, sum = 0, gano21 = 0, contOnce = 0;
  	
 	Pila pila;
 	
@@ -93,25 +92,21 @@ int main() {
 			apilar(&pila, carta);
 			contCartas++;
 		}
-		
 		//printf("Numero: %i\n", carta);
 	}
-	//printf("%i\n\n", longitudPila(&pila));
-	//imprimirPila(&pila);
 	for(i = 0; i < 4; i++) {
 		for(j = 0; j < 3; j++) {
 			valorDesapilado = desapilar(&pila);
-			if(valorDesapilado < 20){
-				arreglo[i][j] = 1;
-			}else if(valorDesapilado > 99){
+			if(valorDesapilado < 20) {
+				arreglo[i][j] = 11;
+			}else if(valorDesapilado > 99) {
 				arreglo[i][j] = 10;
 			}else {
-				while(valorDesapilado >= 10){
+				while(valorDesapilado >= 10) {
 					valorDesapilado = valorDesapilado / 10;
 				}
 				arreglo[i][j] = valorDesapilado;
 			}
-			//arreglo[i][j] = desapilar(&pila);
 		}
 	}
 	for(i = 0; i < 4; i++) {
@@ -122,37 +117,23 @@ int main() {
 	}
 	for(i = 0; i < 4; i++) {
 		for(j = 0; j < 3; j++) {
-			
-			if(arreglo[i][j] == 1 || v1 == 1) {
-				v1 = 1;
-				printf("Entra");
-				jugador[i] += arreglo[i][j];
-				if(jugador[i] < 21){
-					sum = jugador[i] + 10;
-				}else if(sum > 21) {
-						jugador[i] -= 10;
-					}
-			}else {
-				jugador[i] += arreglo[i][j];
-			}
-			
+			if(arreglo[i][j] == 11)
+				contOnce++;
+			jugador[i] += arreglo[i][j];
 		}
-		v1 = 0;
-		if(jugador[i] == 21) {
-			printf("Jugador %i",i+1);
-			printf("Gana con: %i",jugador[i]);
-			gano21++;
+		while(contOnce > 0 && jugador[i] > 21) {
+			jugador[i] -= 10;
+			contOnce--;
 		}
-		else if(jugador[i] > mayor && jugador[i] < 22){
+		if(jugador[i] > mayor && jugador[i] < 22){
    			mayor = jugador[i];
    			numjug = i;
 	   	}
 	   	printf("Total: %i\n", jugador[i]);
 	}
     
-	if(gano21 <= 0) {
-		printf("\nEl jugador %i",numjug+1);
-		printf("\nGana con %i", mayor);
-	}
+	printf("\nEl jugador %i",numjug+1);
+	printf("\nGana con %i", mayor);
+
 	return 0;
 }
