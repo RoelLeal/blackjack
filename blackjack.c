@@ -75,8 +75,8 @@ int estaRepetida(Pila *pila, int carta) {
 
 int main() {
 	int carta = 0, i = 0, j = 0, numeroCarta = 0, valorDesapilado = 0,
- 	tipoCarta = 0, contCartas = 0, arreglo[4][3], temp = 0,jugador[4], v1 = 0,mayor = 0, numjug = 0,
-	sum=0;;
+ 	tipoCarta = 0, contCartas = 0, arreglo[4][3], temp = 0,jugador[4], 
+	v1 = 0,mayor = 0, numjug = 0, sum = 0, gano21 = 0;
  	
  	
 	Pila pila;
@@ -96,7 +96,7 @@ int main() {
 		
 		//printf("Numero: %i\n", carta);
 	}
-	printf("%i\n\n", longitudPila(&pila));
+	//printf("%i\n\n", longitudPila(&pila));
 	//imprimirPila(&pila);
 	for(i = 0; i < 4; i++) {
 		for(j = 0; j < 3; j++) {
@@ -115,53 +115,44 @@ int main() {
 		}
 	}
 	for(i = 0; i < 4; i++) {
-		printf("\n");
 		for(j = 0; j < 3; j++) {
 			printf("%i\n", arreglo[i][j]);
 		}
+		printf("\n");
 	}
 	for(i = 0; i < 4; i++) {
 		for(j = 0; j < 3; j++) {
 			
-			if((arreglo[i][j] == 1) || (v1 == 1)){
-				v1=1;
-				jugador[i]+= arreglo[i][j];
+			if(arreglo[i][j] == 1 || v1 == 1){
+				v1 = 1;
+				//printf("Entra");
+				jugador[i] += arreglo[i][j];
 				if(jugador[i] < 21){
-				sum=jugador[i]+10;
+				sum = jugador[i] + 10;
 					if(sum > 21){
-						jugador[i]= jugador[i]-10;
-					}	
+						jugador[i] -= 10;
+					}
 				}
-			}else{
-				jugador[i]+= arreglo[i][j];
+			}else {
+				jugador[i] += arreglo[i][j];
 			}
-		
 		}
-		v1=0;
-		if(jugador[i]==21){
-			printf("Jugador gana  %i",i+1);
-			printf("Jugador gana  %i",jugador[i]);
+		v1 = 0;
+		if(jugador[i] == 21) {
+			printf("Jugador %i",i+1);
+			printf("Gana con: %i",jugador[i]);
+			gano21++;
 		}
-		else if(jugador[i] > mayor && jugador[i] <22){
+		else if(jugador[i] > mayor && jugador[i] < 22){
    			mayor = jugador[i];
    			numjug = i;
 	   	}
-		
+	   	printf("Total: %i\n", jugador[i]);
 	}
-	
-  
-  /* for(i = 0; i < 3; i++){
-   	
-   	if(jugador[i] > mayor && jugador[i] <22){
-   		mayor = jugador[i];
-   		numjug = i;
-	   }
-   }*/
     
- 	
-	
-	printf("\n\n%i", longitudPila(&pila));
-	printf("\nEl jugador %i",numjug+1);
-	printf("\nGana con %i",mayor);
+	if(gano21 <= 0) {
+		printf("\nEl jugador %i",numjug+1);
+		printf("\nGana con %i", mayor);
+	}
 	return 0;
 }
