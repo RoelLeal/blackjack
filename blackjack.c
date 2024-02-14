@@ -123,19 +123,19 @@ int main() {
 	for(i = 0; i < 4; i++) {
 		for(j = 0; j < 3; j++) {
 			
-			if(arreglo[i][j] == 1 || v1 == 1){
+			if(arreglo[i][j] == 1 || v1 == 1) {
 				v1 = 1;
-				//printf("Entra");
+				printf("Entra");
 				jugador[i] += arreglo[i][j];
 				if(jugador[i] < 21){
-				sum = jugador[i] + 10;
-					if(sum > 21){
+					sum = jugador[i] + 10;
+				}else if(sum > 21) {
 						jugador[i] -= 10;
 					}
-				}
 			}else {
 				jugador[i] += arreglo[i][j];
 			}
+			
 		}
 		v1 = 0;
 		if(jugador[i] == 21) {
