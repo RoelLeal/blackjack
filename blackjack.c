@@ -139,7 +139,7 @@ int main() {
 			}
 		}
 	}else {
-		printf("Nadie gana y todos pierden");
+		printf("\nNadie gana y todos pierden");
 	}
 	return 0;
 }
