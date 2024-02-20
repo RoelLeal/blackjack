@@ -49,15 +49,6 @@ int desapilar(Pila *pila) {
 	return elem;
 }
 
-//void imprimirPila(Pila *pila) {
-//	Nodo *nodo;
-//	nodo = pila -> cima;
-//	while(nodo != NULL) {
-//		printf("%i \n", nodo -> elemento);
-//		nodo = nodo -> siguiente;
-//	}
-//}
-
 int estaRepetida(Pila *pila, int carta) {
 	Nodo *nodo;
 	int bandera = 0;
@@ -72,10 +63,54 @@ int estaRepetida(Pila *pila, int carta) {
 	return bandera;
 }
 
+void imprimirCartas() {
+	int i = 0, j = 0;
+	char tipo[3];
+	for(i = 0; i < 4; i++) {
+		for(j = 2; j <= 14; j++) {
+			switch(i) {
+				case 0:
+					tipo[0] = 'P';
+					break;
+				case 1:
+					tipo[0] = 'D';
+					break;
+				case 2:
+					tipo[0] = 'T';
+					break;
+				case 3:
+					tipo[0] = 'C';
+					break;
+			}
+			switch(j) {
+				case 11:
+					printf("[ J%s ] ", tipo);
+				break;
+				case 12:
+					printf("[ Q%s ] ", tipo);
+				break;
+				case 13:
+					printf("[ K%s ] ", tipo);
+				break;
+				case 14:
+					printf("[ A%s ] ", tipo);
+				break;
+				default:
+					printf("[ %i%s ] ", j, tipo);
+			}
+		}
+		printf("\n");
+	}
+}
+
 int main() {
 	int carta = 0, i = 0, j = 0, numeroCarta = 0, valorDesapilado = 0,
  	tipoCarta = 0, contCartas = 0, arreglo[4][3], jugador[4], 
 	numjug = 0, mayor = 0, contOnce = 0, sum = 0, v1 = 0, temp = 0;
+ 	
+	imprimirCartas();
+	
+	printf("\n");
  	
 	Pila pila;
 	
@@ -91,7 +126,6 @@ int main() {
 			apilar(&pila, carta);
 			contCartas++;
 		}
-		//printf("Numero: %i\n", carta);
 	}
 	for(i = 0; i < 4; i++) {
 		for(j = 0; j < 3; j++) {
