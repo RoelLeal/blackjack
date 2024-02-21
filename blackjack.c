@@ -156,8 +156,9 @@ void imprimirCartas() {
 int main() {
 	int carta = 0, i = 0, j = 0, numeroCarta = 0, valorDesapilado = 0,
  	tipoCarta = 0, contCartas = 0, arreglo[4][3], jugador[4], 
-	numjug = 0, mayor = 0, contOnce = 0;
-	 int sum = 0, v1 = 0; 
+	numjug = 0, mayor = 0, cartasTipo = 0, contOnce = 0, sum = 0, v1 = 0; 
+	char arregloTipos[4][3];
+	
 	imprimirCartas();
 	
 	printf("\n");
@@ -184,6 +185,21 @@ int main() {
 	while(cont < 3) { //Conversión a valor real de la carta
 		for(i = 0; i < 4; i++) {
 			valorDesapilado = desapilar(&pila);
+			cartasTipo = valorDesapilado % 10;
+			switch(cartasTipo) {
+				case 1:
+					arregloTipos[i][cont] = 'P';
+					break;
+				case 2:
+					arregloTipos[i][cont] = 'D';
+					break;
+				case 3:
+					arregloTipos[i][cont] = 'T';
+					break;
+				case 4:
+					arregloTipos[i][cont] = 'C';
+					break;
+			}
 			if(valorDesapilado < 20) {
 				arreglo[i][cont] = 11;
 			}else if(valorDesapilado > 99) {
@@ -197,7 +213,7 @@ int main() {
 	}
 	for(i = 0; i < 4; i++) {
 		for(j = 0; j < 3; j++) {
-			printf("%i\n", arreglo[i][j]);
+			printf("[ %i %c ]\n", arreglo[i][j], arregloTipos[i][j]);
 		}
 		printf("\n");
 	}
