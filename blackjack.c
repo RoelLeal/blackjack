@@ -156,7 +156,8 @@ void imprimirCartas() {
 int main() {
 	int carta = 0, i = 0, j = 0, numeroCarta = 0, valorDesapilado = 0,
  	tipoCarta = 0, contCartas = 0, arreglo[4][3], jugador[4], 
-	numjug = 0, mayor = 0, contOnce = 0, sum = 0, v1 = 0, temp = 0;
+	numjug = 0, mayor = 0, contOnce = 0;
+	 int sum = 0, v1 = 0; 
 	imprimirCartas();
 	
 	printf("\n");
