@@ -63,9 +63,60 @@ int estaRepetida(Pila *pila, int carta) {
 	return bandera;
 }
 
+void imprimirPila(Pila *pila) {
+	Nodo *nodo;
+	int i = 0, j = 0, tipo = 0, valor = 0;
+	char tipoC[1];
+	nodo = pila -> cima;
+	while(i < 4 || nodo != NULL) {
+		for(j = 0; j < 13; j++) {
+			tipo = (nodo -> elemento) % 10;
+			valor = (nodo -> elemento) / 10;
+			switch(tipo) {
+				case 1:
+					tipoC[0] = 'P';
+					break;
+				case 2:
+					tipoC[0] = 'D';
+					break;
+				case 3:
+					tipoC[0] = 'T';
+					break;
+				case 4:
+					tipoC[0] = 'C';
+					break;	
+			}
+			switch(valor){
+				case 1:
+					printf("[ A%c ] ", tipoC[0]);
+					break;
+				case 11:
+					printf("[ J%c ] ", tipoC[0]);
+					break;
+
+				case 12:
+					printf("[ Q%c ] ", tipoC[0]);
+					break;
+
+				case 13:
+					printf("[ K%c ] ", tipoC[0]);
+					break;	
+
+				default: 
+					printf("[ %i%c ] ", valor, tipoC[0]);
+					break;	
+			}
+			//printf("[ %i%i ]", valor, tipo);
+			nodo = nodo -> siguiente;
+		}
+		i++;
+		printf("\n");
+	}
+}
+
 void imprimirCartas() {
 	int i = 0, j = 0;
-	char tipo[3];
+	char tipo[1];
 	for(i = 0; i < 4; i++) {
 		for(j = 2; j <= 14; j++) {
 			switch(i) {
@@ -84,19 +135,19 @@ void imprimirCartas() {
 			}
 			switch(j) {
 				case 11:
-					printf("[ J%s ] ", tipo);
+					printf("[ J%c ] ", tipo[0]);
 				break;
 				case 12:
-					printf("[ Q%s ] ", tipo);
+					printf("[ Q%c ] ", tipo[0]);
 				break;
 				case 13:
-					printf("[ K%s ] ", tipo);
+					printf("[ K%c ] ", tipo[0]);
 				break;
 				case 14:
-					printf("[ A%s ] ", tipo);
+					printf("[ A%c ] ", tipo[0]);
 				break;
 				default:
-					printf("[ %i%s ] ", j, tipo);
+					printf("[ %i%c ] ", j, tipo[0]);
 			}
 		}
 		printf("\n");
@@ -118,7 +169,7 @@ int main() {
 	
 	srand(time(NULL));
 	
-	while(contCartas < 12) {
+	while(contCartas < 52) {
 		numeroCarta = 1 + rand() % 13;
 		tipoCarta = 1 + rand() % 4;
 		carta = (numeroCarta * 10) + tipoCarta;
@@ -127,6 +178,9 @@ int main() {
 			contCartas++;
 		}
 	}
+	printf("\n");
+	imprimirPila(&pila);
+	printf("\n");
 	for(i = 0; i < 4; i++) {
 		for(j = 0; j < 3; j++) {
 			valorDesapilado = desapilar(&pila);
