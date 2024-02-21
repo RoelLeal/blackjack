@@ -106,7 +106,6 @@ void imprimirPila(Pila *pila) {
 					printf("[ %i%c ] ", valor, tipoC[0]);
 					break;	
 			}
-			//printf("[ %i%i ]", valor, tipo);
 			nodo = nodo -> siguiente;
 		}
 		i++;
@@ -158,7 +157,6 @@ int main() {
 	int carta = 0, i = 0, j = 0, numeroCarta = 0, valorDesapilado = 0,
  	tipoCarta = 0, contCartas = 0, arreglo[4][3], jugador[4], 
 	numjug = 0, mayor = 0, contOnce = 0, sum = 0, v1 = 0, temp = 0;
- 	
 	imprimirCartas();
 	
 	printf("\n");
@@ -181,18 +179,20 @@ int main() {
 	printf("\n");
 	imprimirPila(&pila);
 	printf("\n");
-	for(i = 0; i < 4; i++) {
-		for(j = 0; j < 3; j++) {
+	int cont = 0;
+	while(cont < 3) { //Conversión a valor real de la carta
+		for(i = 0; i < 4; i++) {
 			valorDesapilado = desapilar(&pila);
 			if(valorDesapilado < 20) {
-				arreglo[i][j] = 11;
+				arreglo[i][cont] = 11;
 			}else if(valorDesapilado > 99) {
-				arreglo[i][j] = 10;
+				arreglo[i][cont] = 10;
 			}else {
 				valorDesapilado = valorDesapilado / 10;
-				arreglo[i][j] = valorDesapilado;
+				arreglo[i][cont] = valorDesapilado;
 			}
 		}
+		cont++;
 	}
 	for(i = 0; i < 4; i++) {
 		for(j = 0; j < 3; j++) {
@@ -200,7 +200,7 @@ int main() {
 		}
 		printf("\n");
 	}
-	for(i = 0; i < 4; i++) {
+	for(i = 0; i < 4; i++) { // Módulo para ganador y conteo de puntos
 		for(j = 0; j < 3; j++) {
 			if(arreglo[i][j] == 11)
 				contOnce++;
@@ -217,7 +217,7 @@ int main() {
 	   	}
 	   	printf("[%i] Total: %i\n", i+1, jugador[i]);
 	}
-	if(mayor > 0) {
+	if(mayor > 0) { // Módulo que muestra ganadores y perdedores
 		for(i = 0; i < 4; i++) {
 			if(i == numjug || mayor == jugador[i]) {
 				printf("\nEl jugador %i", i+1);
